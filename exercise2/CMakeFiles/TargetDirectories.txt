@@ -1,0 +1,3 @@
+/home/andre/Documentos/Code/VSB-TUO/DZO/exercise2/CMakeFiles/rebuild_cache.dir
+/home/andre/Documentos/Code/VSB-TUO/DZO/exercise2/CMakeFiles/dzo.dir
+/home/andre/Documentos/Code/VSB-TUO/DZO/exercise2/CMakeFiles/edit_cache.dir
