@@ -26,16 +26,16 @@ map<string, cv::Mat> calculate_spectrum(cv::Mat src){
         for (int x = 0; x < N - 1; x++){
             double pix_real = 0.0;
             double pix_imaginary = 0.0;
-            for (int m = 0; m < M - 1; m++){
-                for (int n = 0; n < N - 1; n++){
-                    double value = result_64fc1_phase_spectrum.at<double>(m,n);
-                    double basis_real = cos(2*M_PI*(m*(double)y/M + n*(double)x/N))/sqrt(M*N);
-                    double basis_imaginary = -sin(2*M_PI*(m*(double)y/M + n*(double)x/N))/sqrt(M*N);
+            for (int m = 0; m < M; m++){
+                for (int n = 0; n < N; n++){
+                    double value = src.at<double>(m,n);
+                    double basis_real = cos(2*M_PI*((double)m*(double)y/M + (double)n*(double)x/N))/sqrt(M*N);
+                    double basis_imaginary = -sin(2*M_PI*((double)m*(double)y/M + (double)n*(double)x/N))/sqrt(M*N);
                     pix_real += value*basis_real;
                     pix_imaginary += value*basis_imaginary;
                 }
             }
-            result_64fc1_phase_spectrum.at<double>(y,x) = atan(pix_imaginary/pix_real);
+            result_64fc1_phase_spectrum.at<double>(y,x) = atan2(pix_imaginary, pix_real);
             result_64fc1_power_spectrum.at<double>(y,x) = log(pix_real*pix_real + pix_imaginary*pix_imaginary);
         }   
     }
@@ -49,7 +49,7 @@ map<string, cv::Mat> calculate_spectrum(cv::Mat src){
 
 int main()
 {
-    cv::Mat src_8uc1_img = cv::imread( "earth.png", cv::IMREAD_GRAYSCALE ); // load color image from file system to Mat variable, this will be loaded using 8 bits (uchar)
+    cv::Mat src_8uc1_img = cv::imread( "lena64.png", cv::IMREAD_GRAYSCALE ); // load color image from file system to Mat variable, this will be loaded using 8 bits (uchar)
 
     if (src_8uc1_img.empty()) {
         printf("Unable to read input file (%s, %d).", __FILE__, __LINE__);
@@ -64,6 +64,9 @@ int main()
 
 
     // diplay images
+    cv::namedWindow("Original", cv::WINDOW_NORMAL);
+    cv::namedWindow("Power", cv::WINDOW_NORMAL);
+    cv::namedWindow("Phase", cv::WINDOW_NORMAL);
     cv::imshow("Original", src_64fc1_img);
     cv::imshow("Phase", result_64fc1_phase_spectrum);
     cv::imshow("Power", result_64fc1_power_spectrum);
