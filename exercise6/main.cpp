@@ -23,7 +23,7 @@ void shift_pixels_power_spectrum(cv::Mat* src){
         }
     }
     for (int y = 0 ; y < src->rows/2; y++){
-        for (int x = src->cols - 1; x > src->cols/2; x--){
+        for (int x = src->cols - 1; x >= src->cols/2; x--){
             double copy = src->at<double>(y,x);
             src->at<double>(y,x) = src->at<double>(y + src->rows/2, x - src->cols/2);
             src->at<double>(y + src->rows/2,x - src->cols/2) = copy;
