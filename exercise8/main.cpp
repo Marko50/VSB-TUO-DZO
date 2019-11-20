@@ -67,7 +67,7 @@ int ex_rld()
     cv::Mat src_8uc3_img, geom_8uc3_img;
     RLDUserData rld_user_data( 3.0, 1.0, src_8uc3_img, geom_8uc3_img );
 
-    src_8uc3_img = cv::imread( "distorted_panorama.jpg", CV_LOAD_IMAGE_COLOR );
+    src_8uc3_img = cv::imread( "distorted_window.jpg", CV_LOAD_IMAGE_COLOR );
     if ( src_8uc3_img.empty() )
     {
         printf( "Unable to load image!\n" );

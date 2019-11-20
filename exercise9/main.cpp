@@ -1,6 +1,5 @@
 #include <math.h>
 #include <algorithm> 
-
 #include <opencv2/opencv.hpp>
 
 using namespace std;
@@ -27,11 +26,14 @@ void calculate_cumulative_histogram(int * histogram, int * cumulative_histogram,
 
 void calculate_equalized_image(cv::Mat src, cv::Mat * result, int * cumulative_histogram, int size){
     int* min_value_iterator = min_element(cumulative_histogram, cumulative_histogram + size);
+    uchar lut[256] = {0};
+    for (int i = 0; i < 256; i++){
+	    lut[i] = (uchar) round((cumulative_histogram[i] - *min_value_iterator)*(256-1)/((src.rows * src.cols) - *min_value_iterator));
+    }
     for (int y = 0; y < src.rows; y++){
         for (int x = 0; x < src.cols; x++){
             uchar original_value = src.at<uchar>(y,x);
-            uchar new_value = (uchar) round((cumulative_histogram[original_value] - *min_value_iterator)*(256-1)/((src.rows * src.cols) - *min_value_iterator));
-            result->at<uchar>(y,x) = new_value;
+            result->at<uchar>(y,x) = lut[original_value];
         }
     }
 }
