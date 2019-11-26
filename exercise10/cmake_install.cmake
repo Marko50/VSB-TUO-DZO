@@ -1,4 +1,4 @@
-# Install script for directory: /home/andre/Documentos/Code/VSB-TUO/DZO/exercise1
+# Install script for directory: /home/andre/Documentos/Code/VSB-TUO/DZO/exercise10
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/andre/Documentos/Code/VSB-TUO/DZO/exercise1/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/andre/Documentos/Code/VSB-TUO/DZO/exercise10/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

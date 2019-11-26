@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andre/Documentos/Code/VSB-TUO/DZO/exercise10/main.cpp
+math.h
+-
+algorithm
+-
+iostream
+-
+opencv2/opencv.hpp
+-
+

@@ -6,6 +6,16 @@ default_target: all
 
 .PHONY : default_target
 
+# The main recursive all target
+all:
+
+.PHONY : all
+
+# The main recursive preinstall target
+preinstall:
+
+.PHONY : preinstall
+
 #=============================================================================
 # Special targets provided by cmake.
 
@@ -44,28 +54,18 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/andre/Documentos/Code/VSB-TUO/DZO/exercise1
+CMAKE_SOURCE_DIR = /home/andre/Documentos/Code/VSB-TUO/DZO/exercise10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/andre/Documentos/Code/VSB-TUO/DZO/exercise1
+CMAKE_BINARY_DIR = /home/andre/Documentos/Code/VSB-TUO/DZO/exercise10
 
 #=============================================================================
 # Directory level rules for the build root directory
-
-# The main recursive "all" target.
-all: CMakeFiles/dzo.dir/all
-
-.PHONY : all
 
 # The main recursive "clean" target.
 clean: CMakeFiles/dzo.dir/clean
 
 .PHONY : clean
-
-# The main recursive "preinstall" target.
-preinstall:
-
-.PHONY : preinstall
 
 #=============================================================================
 # Target rules for target CMakeFiles/dzo.dir
@@ -74,14 +74,19 @@ preinstall:
 CMakeFiles/dzo.dir/all:
 	$(MAKE) -f CMakeFiles/dzo.dir/build.make CMakeFiles/dzo.dir/depend
 	$(MAKE) -f CMakeFiles/dzo.dir/build.make CMakeFiles/dzo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/andre/Documentos/Code/VSB-TUO/DZO/exercise1/CMakeFiles --progress-num=1,2 "Built target dzo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/andre/Documentos/Code/VSB-TUO/DZO/exercise10/CMakeFiles --progress-num=1,2 "Built target dzo"
 .PHONY : CMakeFiles/dzo.dir/all
+
+# Include target in all.
+all: CMakeFiles/dzo.dir/all
+
+.PHONY : all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dzo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/andre/Documentos/Code/VSB-TUO/DZO/exercise1/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/andre/Documentos/Code/VSB-TUO/DZO/exercise10/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dzo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/andre/Documentos/Code/VSB-TUO/DZO/exercise1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/andre/Documentos/Code/VSB-TUO/DZO/exercise10/CMakeFiles 0
 .PHONY : CMakeFiles/dzo.dir/rule
 
 # Convenience name for target.
