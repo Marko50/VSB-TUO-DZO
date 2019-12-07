@@ -6,29 +6,52 @@
 
 using namespace std;
 
-void calculate_negative_laplace_operator(cv::Mat src, cv::Mat & dest ){
-    int LAPLACIAN_DIMENSION = 3;
-    int BOX_BLUR_NORMALIZATION = 9;
-    int laplacian_mask[LAPLACIAN_DIMENSION][LAPLACIAN_DIMENSION] = { {0, -1, 0}, {-1, 4 , -1}, {0, -1, 0} };
+const int KERNEL_DIMENSION = 3;
 
-    for (int y = 0; y < dest.rows - LAPLACIAN_DIMENSION; y++){
-        for (int x = 0; x < dest.cols - LAPLACIAN_DIMENSION; x++){
-            cv::Vec3b value = cv::Vec3b(0,0,0);
-            for (int i = 0; i < LAPLACIAN_DIMENSION; i++){
-                for (int j = 0; j < LAPLACIAN_DIMENSION; j++){
-                    cv::Vec3b src_value = src.at<cv::Vec3b>(y + i, x + j);
-                    value += laplacian_mask[i][j]*src_value;
+
+void apply_convolution(cv::Mat src, cv::Mat & dest,  int kernel[][KERNEL_DIMENSION], int normalization ){
+    for (int y = 0; y < dest.rows - KERNEL_DIMENSION; y++){
+            for (int x = 0; x < dest.cols - KERNEL_DIMENSION; x++){
+                int value = 0;
+                for (int i = 0; i < KERNEL_DIMENSION; i++){
+                    for (int j = 0; j < KERNEL_DIMENSION; j++){
+                        int src_value = (int) src.at<uchar>(y + i, x + j);
+                        value += kernel[i][j]*src_value;
+                    }
                 }
+                value /= (normalization);
+                if (value < 0){
+                    value = 0;
+                }
+                else if (value > 255){
+                    value = 255;
+                }
+                dest.at<uchar>(y,x) = (uchar) value;
             }
-            dest.at<cv::Vec3b>(y,x) = (cv::Vec3b) value;
         }
-    }
 }
 
-void apply_laplace_operator(cv::Mat src, cv::Mat & dest){
-    cv::Mat negative_laplace_operator = cv::Mat(src.rows, src.cols, CV_8UC3);
-    calculate_negative_laplace_operator(src, negative_laplace_operator);
-    dest = negative_laplace_operator;
+void calculate_positive_laplace(cv::Mat src, cv::Mat & dest){
+    int kernel[KERNEL_DIMENSION][KERNEL_DIMENSION] = { {0, 1, 0}, {1, -4 , 1}, {0, 1, 0} };
+    apply_convolution(src, dest, kernel,1);
+}
+
+void calculate_negative_laplace(cv::Mat src, cv::Mat & dest){
+    int kernel[KERNEL_DIMENSION][KERNEL_DIMENSION] = { {0, -1, 0}, {-1, 4 ,-1}, {0, -1, 0} };
+    apply_convolution(src, dest, kernel,1);
+}
+
+
+void calculate_laplace(cv::Mat src, cv::Mat & dest){
+    cv::Mat src_grayscale = cv::Mat(src.rows, src.cols, CV_8UC1);
+    cv::Mat positive_laplace = cv::Mat(src.rows, src.cols, CV_8UC1);
+    cv::Mat negative_laplace = cv::Mat(src.rows, src.cols, CV_8UC1);
+    cv::cvtColor(src, src_grayscale, cv::COLOR_BGR2GRAY);
+
+    calculate_positive_laplace(src_grayscale, positive_laplace);
+    calculate_negative_laplace(src_grayscale, negative_laplace);
+
+    dest = negative_laplace;
 }
 
 int main(){
@@ -39,10 +62,11 @@ int main(){
         return -1;
     }
     
-    cv::Mat src_8uc3_img_edges;
-    apply_laplace_operator(src_8uc3_img_valve, src_8uc3_img_edges);
+    cv::Mat src_8uc1_img_edges;
+    calculate_laplace(src_8uc3_img_valve, src_8uc1_img_edges);
+    
     cv::imshow("Original", src_8uc3_img_valve);
-    cv::imshow("Result", src_8uc3_img_edges);
+    cv::imshow("Result", src_8uc1_img_edges);
 
     cv::waitKey( 0 ); // wait until keypressed
 
