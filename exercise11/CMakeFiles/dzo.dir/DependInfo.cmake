@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/andre/Documentos/Code/VSB-TUO/DZO/exercise11/main.cpp" "/home/andre/Documentos/Code/VSB-TUO/DZO/exercise11/CMakeFiles/dzo.dir/main.cpp.o"
+  "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise11/main.cpp" "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise11/CMakeFiles/dzo.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/include/opencv"
+  "/usr/include/opencv4"
   )
 
 # Targets to which this target links.
