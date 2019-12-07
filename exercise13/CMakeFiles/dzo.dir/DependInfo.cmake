@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise3/main.cpp" "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise3/CMakeFiles/dzo.dir/main.cpp.o"
+  "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise13/main.cpp" "/home/andre/Documents/VSB-TUO/VSB-TUO-DZO/exercise13/CMakeFiles/dzo.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

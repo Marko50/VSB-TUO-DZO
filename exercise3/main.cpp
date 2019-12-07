@@ -49,6 +49,7 @@ int main()
                     value += gaussian_blur_data[i][j]*src_value;
                 }
             }
+	    
             value *= 1.0f/(GAUSSIAN_BLUR_NORMALIZATION);
             result_8uc1_img2.at<uchar>(y,x) = (uchar) value;
         }
